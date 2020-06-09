@@ -3616,10 +3616,10 @@ CfgBuilder::get_instruction(const statement_t &s) const {
   return m_impl->get_instruction(s);
 }
 
-void CfgBuilder::compute_live_symbols() {
+void CfgBuilder::compute_live_symbols(bool ignore_dead) {
   if (!m_ls) {
     auto &cfg = m_impl->get_cfg();
-    m_ls.reset(new liveness_t(cfg));
+    m_ls.reset(new liveness_t(cfg, ignore_dead));
     CRAB_VERBOSE_IF(1,
 		    auto fdecl = cfg.get_func_decl();            
 		    crab::get_msg_stream() << "Running liveness analysis for " 

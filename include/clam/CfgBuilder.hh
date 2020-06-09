@@ -78,10 +78,10 @@ public:
   // return crab control flow graph
   cfg_t& get_cfg();
 
-  // compute live symbols per block by running standard liveness
-  // analysis
-  void compute_live_symbols();
-  
+  // compute live symbols (and optionally dead) per block by running
+  // standard liveness analysis
+  void compute_live_symbols(bool ignore_dead = false);
+
   // return live symbols at the end of block bb. Return None if
   // compute_live_symbols has not been called.
   llvm::Optional<varset> get_live_symbols(const llvm::BasicBlock *bb) const;
